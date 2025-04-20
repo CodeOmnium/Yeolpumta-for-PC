@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeolpumta Clone</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header>
+            <div class="menu-icon">
+                <span class="material-icons">menu</span>
+            </div>
+            <div class="date-display" id="date-display">
+                Sun, 13/04
+            </div>
+        </header>
+
+        <!-- Main Timer -->
+        <div class="main-timer">
+            <div class="timer-display" id="main-timer-display">00:00:00</div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <div class="tab active" data-tab="timer">Timer</div>
+            <div class="tab" data-tab="insight">Insight</div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="content-area">
+            <!-- Timer Tab Content -->
+            <div class="tab-content active" id="timer-content">
+                <div class="subject-list" id="subject-list">
+                    <!-- Subjects will be added dynamically -->
+                </div>
+            </div>
+
+            <!-- Insight Tab Content -->
+            <div class="tab-content" id="insight-content">
+                <!-- Period Selector -->
+                <div class="period-selector">
+                    <div class="period-option">Period</div>
+                    <div class="period-option active">Day</div>
+                    <div class="period-option">Week</div>
+                    <div class="period-option">Month</div>
+                </div>
+
+                <!-- Insights View -->
+                <div class="insight-view active" id="insights-view">
+                    <!-- Month Navigation -->
+                    <div class="month-nav">
+                        <button type="button" class="month-nav-btn" id="prev-month"><span class="material-icons">chevron_left</span></button>
+                        <div id="current-month">Apr</div>
+                        <button type="button" class="month-nav-btn" id="next-month"><span class="material-icons">chevron_right</span></button>
+                    </div>
+
+                    <!-- Calendar Grid -->
+                    <div class="calendar-grid">
+                        <div class="calendar-header">
+                            <div>Mon</div>
+                            <div>Tue</div>
+                            <div>Wed</div>
+                            <div>Thu</div>
+                            <div>Fri</div>
+                            <div>Sat</div>
+                            <div>Sun</div>
+                        </div>
+                        <div class="calendar-days" id="calendar-days">
+                            <!-- Calendar days will be added dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Monthly Total -->
+                    <div class="monthly-total">
+                        <div class="total-days">
+                            <span class="day-indicator">0</span>
+                            <span class="day-indicator">4</span>
+                            <span class="day-indicator active">7</span>
+                            <span class="day-indicator">10+</span>
+                        </div>
+                        <div class="total-time" id="monthly-total-time">Apr: 91H 16M</div>
+                    </div>
+
+                    <!-- Daily Summary -->
+                    <div class="daily-summary">
+                        <div class="day-navigation">
+                            <button type="button" class="day-nav-btn" id="prev-day"><span class="material-icons">chevron_left</span></button>
+                            <div class="summary-date" id="summary-date">Wed, 9 Apr</div>
+                            <button type="button" class="day-nav-btn" id="next-day"><span class="material-icons">chevron_right</span></button>
+                        </div>
+
+                        <div class="summary-stats">
+                            <div class="stat-column">
+                                <div class="stat-label">Total</div>
+                                <div class="stat-value" id="daily-total">09:55:06</div>
+                                <div class="stat-detail" id="daily-apps">(Apps 05:18:29)</div>
+                            </div>
+                            <div class="stat-column">
+                                <div class="stat-label">Max Focus</div>
+                                <div class="stat-value" id="daily-max-focus">02:17:25</div>
+                            </div>
+                        </div>
+
+                        <div class="summary-stats">
+                            <div class="stat-column">
+                                <div class="stat-label">Started</div>
+                                <div class="stat-value" id="daily-started">06:27 am</div>
+                            </div>
+                            <div class="stat-column">
+                                <div class="stat-label">Finished</div>
+                                <div class="stat-value" id="daily-finished">08:20 pm</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Section -->
+                    <div class="timeline-section">
+                        <div class="timeline-header">Timeline</div>
+                        <div class="timeline-container" id="timeline-container">
+                            <!-- Timeline items will be added dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Daily Todos Section -->
+                    <div class="daily-todos-section">
+                        <div class="daily-todos-header">To-dos</div>
+                        <div class="daily-todos-container" id="daily-todos-container">
+                            <!-- Todo items will be added dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Buttons -->
+        <div class="add-buttons">
+            <button type="button" id="add-subject-btn" class="add-btn">+ Subject</button>
+            <button type="button" id="add-todo-btn" class="add-btn">+ To-do</button>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bottom-nav">
+            <div class="nav-item active">
+                <span class="material-icons">home</span>
+                <span>Home</span>
+            </div>
+            <div class="nav-item">
+                <span class="material-icons">more_horiz</span>
+                <span>More</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for adding subject -->
+    <div class="modal" id="subject-modal">
+        <div class="modal-content">
+            <h2>Add Subject</h2>
+            <input type="text" id="subject-name" placeholder="Subject Name">
+            <div class="color-picker">
+                <div class="color-option" data-color="#FF9800"></div>
+                <div class="color-option" data-color="#4CAF50"></div>
+                <div class="color-option" data-color="#2196F3"></div>
+                <div class="color-option" data-color="#9C27B0"></div>
+                <div class="color-option" data-color="#F44336"></div>
+            </div>
+            <div class="modal-buttons">
+                <button type="button" id="cancel-subject">Cancel</button>
+                <button type="button" id="save-subject">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for adding todo -->
+    <div class="modal" id="todo-modal">
+        <div class="modal-content">
+            <h2>Add To-do</h2>
+            <select id="todo-subject" aria-label="Select Subject">
+        <!-- Subject options will be added dynamically -->
+      </select>
+            <input type="text" id="todo-text" placeholder="To-do Item">
+            <div class="modal-buttons">
+                <button type="button" id="cancel-todo">Cancel</button>
+                <button type="button" id="save-todo">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirm-modal">
+        <div class="modal-content">
+            <h2>Confirm</h2>
+            <p id="confirm-message">Are you sure?</p>
+            <div class="modal-buttons">
+                <button type="button" id="confirm-no">No</button>
+                <button type="button" id="confirm-yes">Yes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Session Modal for adding/editing sessions -->
+    <div class="modal" id="session-modal">
+        <div class="modal-content">
+            <h2 id="session-modal-title">Edit Session</h2>
+            <select id="session-subject" aria-label="Select Subject">
+                <!-- Subject options will be added dynamically -->
+            </select>
+            <div class="time-inputs">
+                <div class="time-input-group">
+                    <label for="session-start">Start Time</label>
+                    <input type="time" id="session-start">
+                </div>
+                <div class="time-input-group">
+                    <label for="session-end">End Time</label>
+                    <input type="time" id="session-end">
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button type="button" id="cancel-session">Cancel</button>
+                <button type="button" id="save-session">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settings-modal">
+        <div class="modal-content">
+            <h2>Settings</h2>
+            <div class="settings-section">
+                <h3>Data Management</h3>
+                <div class="setting-item">
+                    <button type="button" id="clear-data-btn" class="danger-btn">Clear All Data</button>
+                    <p class="setting-description">This will delete all your data and reset the app to its default state.</p>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button type="button" id="close-settings">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+
+</html>
